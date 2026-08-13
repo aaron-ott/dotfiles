@@ -10,3 +10,9 @@ vim.g.terminal_emulator = "bash"
 vim.opt.shell = "bash"
 
 vim.g.snacks_animate = false
+
+vim.g.autoformat = false
+
+vim.opt.relativenumber = false
+
+vim.opt.path:append("**")

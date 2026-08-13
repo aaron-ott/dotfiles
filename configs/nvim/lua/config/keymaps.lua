@@ -5,3 +5,8 @@
 local map = vim.keymap.set
 
 map("n", "<leader>cl", "<cmd>LspInfo<cr>", { desc = "Lsp Info" })
+
+vim.keymap.del("n", "<leader>td");
+map("n", "<leader>td", "<cmd>Dooing<cr>", { desc = "Global Todo" })
+
+map("n", "<leader>sp", "<cmd>NeovimProjectDiscover<cr>", {desc = "Projects"})

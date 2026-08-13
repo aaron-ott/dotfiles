@@ -14,5 +14,9 @@ return {
         },
       },
     },
+    keys = {
+      { "<leader>td", false },
+      { "<leader>tD", false },
+    },
   },
 }

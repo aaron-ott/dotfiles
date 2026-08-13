@@ -5,5 +5,5 @@ return {
   { "ellisonleao/gruvbox.nvim", name = "gruvbox" },
   { "folke/tokyonight.nvim", name = "tokyonight" },
   { "rose-pine/neovim", name = "rose-pine" },
-  { "LazyVim/LazyVim", opts = { colorscheme = "kanagawa" } },
+  { "LazyVim/LazyVim", opts = { colorscheme = "nordic" } },
 }

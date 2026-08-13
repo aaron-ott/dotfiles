@@ -49,3 +49,15 @@ require("lazy").setup({
     enabled = false,
   },
 })
+
+require('dap').adapters.python = {
+  type = 'executable',
+  command = 'python', -- OR 'debugpy-adapter.cmd' on Windows
+  args = { '-m', 'debugpy.adapter' },
+}
+
+require('conform').setup({
+    formatters_by_ft = {
+        javascript = { "prettier" }
+    }
+})
