@@ -4,8 +4,8 @@ return {
     opts = {
       servers = {
         pyright = {
-            mason = false,
-            enabled = false,
+            mason = true,
+            enabled = true,
         --   capabilities = (function()
         --     local capabilities = vim.lsp.protocol.make_client_capabilities()
         --     capabilities.textDocument.publishDiagnostics.tagSupport.valueSet = { 2 }

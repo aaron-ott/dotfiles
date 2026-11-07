@@ -10,7 +10,7 @@ return {
     end
 
     Hydra({
-      name = "Debug",
+      name = "Debug Hydra Mode",
  --      hint = [[
  -- [c] continue    [i] step into   [o] step over   [u] step out
  -- [b] breakpoint  [t] terminate   [l] repl        [q] quit/exit

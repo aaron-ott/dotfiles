@@ -50,11 +50,52 @@ require("lazy").setup({
   },
 })
 
-require('dap').adapters.python = {
-  type = 'executable',
-  command = 'python', -- OR 'debugpy-adapter.cmd' on Windows
-  args = { '-m', 'debugpy.adapter' },
-}
+local dap = require('dap')
+-- One adapter, two modes: attach -> connect to a running debugpy; launch -> spawn debugpy.adapter.
+dap.adapters.python = function(callback, config)
+  if config.request == "attach" then
+    local c = config.connect or {}
+    callback({ type = "server", host = c.host or "127.0.0.1", port = c.port or 5678 })
+  else
+    callback({ type = "executable", command = "python", args = { "-m", "debugpy.adapter" } })
+  end
+end
+
+local function split_args(s)
+  return s == "" and {} or vim.split(s, " ", { trimempty = true })
+end
+
+vim.keymap.set("n", "<leader>da", function()
+  vim.ui.select({ "Run", "Attach" }, { prompt = "Debug:" }, function(choice)
+    if not choice then return end
+    if choice == "Run" then
+      vim.ui.input({ prompt = "Args: " }, function(args)
+        if args == nil then return end
+        dap.run({
+          type = "python",
+          request = "launch",
+          name = "Run with args",
+          program = "${file}",
+          args = split_args(args),
+          console = "integratedTerminal",
+        })
+      end)
+    else
+      vim.ui.input({ prompt = "Host: ", default = "127.0.0.1" }, function(host)
+        if not host then return end
+        vim.ui.input({ prompt = "Port: ", default = "5678" }, function(port)
+          if not port then return end
+          dap.run({
+            type = "python",
+            request = "attach",
+            name = "Attach to debugpy",
+            connect = { host = host, port = tonumber(port) },
+          })
+        end)
+      end)
+    end
+  end)
+end, { desc = "Launch Debug" })
 
 require('conform').setup({
     formatters_by_ft = {
